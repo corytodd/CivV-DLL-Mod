@@ -4421,8 +4421,9 @@ CvCity* CvReligionAI::ChooseMissionaryTargetCity(UnitHandle pUnit)
 	// Loop through all the players
 	for(int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
+		// Only spread to living AI players
 		CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iI);
-		if(kPlayer.isAlive())
+		if(kPlayer.isAlive() && !kPlayer.isHuman())
 		{
 			// Loop through each of their cities
 			int iLoop;
@@ -4705,8 +4706,9 @@ CvCity *CvReligionAI::ChooseProphetConversionCity(bool bOnlyBetterThanEnhancingR
 	{
 		for(int iPlayerLoop = 0; iPlayerLoop < MAX_CIV_PLAYERS; iPlayerLoop++)
 		{
+			// Only spread to living AI players
 			CvPlayer &kLoopPlayer = GET_PLAYER((PlayerTypes)iPlayerLoop);
-			if(kLoopPlayer.isAlive() && iPlayerLoop != m_pPlayer->GetID())
+			if(kLoopPlayer.isAlive() && iPlayerLoop != m_pPlayer->GetID() && !kLoopPlayer.isHuman())
 			{
 				int iCityLoop;
 				for(pLoopCity = GET_PLAYER((PlayerTypes)iPlayerLoop).firstCity(&iCityLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER((PlayerTypes)iPlayerLoop).nextCity(&iCityLoop))
